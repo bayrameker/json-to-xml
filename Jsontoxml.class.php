@@ -1,6 +1,6 @@
 <?php
 
-// tarit yöntemimi tanımlıyorum ve içerisine çağıracağım methodlarımı tanımlıyorum
+// trait yöntemimi tanımlıyorum ve içerisine çağıracağım methodlarımı tanımlıyorum
 trait MethodsTrait {
 
 public static function StrCharArray() {
@@ -28,6 +28,7 @@ public function normalize_content($string);
 
 }
 
+// soyut sınıfımı middleware olarak tanımladım
 abstract class Middleware implements Normalize{
 
 private $extract_root;
