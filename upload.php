@@ -97,7 +97,7 @@ else{
     $link="output/".$storagename.".".$dosyauzanti;
 ?>
 
-<button><a href="<?php $link?>"> Çıkıyı Görüntüle</a></button>
+<button><a href="<?php echo $link?>"> Çıkıyı Görüntüle</a></button>
 
 </div>
 </div>
