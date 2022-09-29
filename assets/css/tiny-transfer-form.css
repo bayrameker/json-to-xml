@@ -1,0 +1,973 @@
+/* ui-uploader */
+
+.ui-uploader {
+    position: relative;
+}
+
+.ui-uploader,
+.ui-uploader *,
+.ui-uploader :after,
+.ui-uploader :before,
+.ui-uploader:after,
+.ui-uploader:before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ui-uploader-target {
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, .3);
+    line-height: 30;
+    z-index: 9;
+    color: rgb(42, 132, 224);
+}
+
+.ui-uploader-disabled .ui-uploader-target,
+.no-touch .ui-uploader-disabled:hover .ui-uploader-target {
+    cursor: default;
+    cursor: not-allowed
+}
+
+.ui-uploader-dropping .ui-uploader-target {
+    display: block;
+}
+
+
+/* tiny-transfer */
+
+.tiny-transfer {
+    height: 28em;
+    left: 5em;
+    margin: -12.8125em 0 0;
+    position: absolute;
+    top: 50%;
+    transition: transform .5s cubic-bezier(.77, 0, .175, 1);
+    width: 320px;
+    z-index: 30;
+}
+
+.tiny-transfer .form-scrollbar input,
+.tiny-transfer .form-scrollbar textarea,
+.tiny-transfer .form-scrollbar input:focus,
+.tiny-transfer .form-scrollbar textarea:focus {
+    border-color: transparent;
+    border-radius: 0;
+    box-shadow: 0 0 0;
+    outline: none;
+}
+
+
+/* tiny-transfer-alert */
+
+.tiny-transfer-alert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    display: none;
+}
+
+.tiny-transfer-alert .toast {
+    border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    -moz-border-radius: 3px 3px 0 0;
+    -ms-border-radius: 3px 3px 0 0;
+    -o-border-radius: 3px 3px 0 0;
+}
+
+
+/* tiny-transfer-form */
+
+.tiny-transfer-form {
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, .1), 0 10px 30px 0 rgba(0, 0, 0, .2);
+    position: relative;
+    z-index: 2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    overflow: hidden;
+}
+
+.tiny-transfer-details .details-scrollbar,
+.tiny-transfer-form .download-scrollbar,
+.tiny-transfer-form .form-scrollbar {
+    height: 23.5em;
+}
+
+.tiny-transfer-details .details-scrollbar {
+    width: calc(100% + 30px);
+}
+
+.tiny-transfer-form form {
+    bottom: 0;
+    height: 1px;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+}
+
+.tiny-transfer-form .files {
+    border-bottom: 1px solid #d4d7d9;
+    position: relative;
+}
+
+
+/* files-list */
+
+.tiny-transfer-form .files-list {
+    background: #f7f9fa;
+    display: none;
+    margin-top: -140px;
+    min-height: 417px;
+    padding: 150px 0 52px;
+}
+
+.tiny-transfer-form.type-email .files-list {
+    min-height: 348px;
+}
+
+.tiny-transfer-form .files-list .files-queue {
+    padding: 0 10px;
+}
+
+
+/* files-add-more files-add-event  */
+
+.tiny-transfer-form .files-add-more {
+    padding: 10px 0;
+    cursor: pointer;
+    bottom: 0;
+    left: 15px;
+    position: absolute;
+    right: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.tiny-transfer-form .files-add-more .files-add-event i {
+    font-size: 24px;
+}
+
+.tiny-transfer-form .files-add-more .files-add-event strong {
+    color: #6a6d70;
+    font-size: .8125em;
+    font-weight: normal;
+}
+
+.tiny-transfer-form .files-add-more .files-add-event p {
+    color: #6a6d70;
+    font-size: .75em;
+}
+
+
+/* files-queue-item */
+
+.tiny-transfer-form .file-item {
+    position: relative;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid #ebeef1;
+    display: flex;
+}
+
+.tiny-transfer-form .file-item-body {
+    padding: 0 15px;
+    flex: 1;
+    z-index: 2;
+    position: relative;
+    line-height: 1.2;
+    overflow: hidden;
+}
+
+.tiny-transfer-form .file-item-body p {
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+    color: #74809d;
+}
+
+.tiny-transfer-form .file-item-body span {
+    font-size: 12px;
+    color: #979fb8;
+}
+
+.tiny-transfer-form .file-item-icon {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e1e1e1;
+}
+
+.tiny-transfer-form .file-item-thumbnail {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    z-index: 2;
+}
+
+.tiny-transfer-form .file-item-thumbnail i,
+.tiny-transfer-form .file-item-thumbnail img {
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.tiny-transfer-form .file-item-thumbnail i {
+    position: absolute;
+    display: block;
+    width: 90%;
+    font-style: normal;
+    font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    text-shadow: 0px 0px 1px #555;
+}
+
+.tiny-transfer-form .file-item-thumbnail img {
+    position: absolute;
+    max-width: none;
+    max-height: 100%;
+    background: #fff;
+}
+
+.tiny-transfer-form .file-item-download,
+.tiny-transfer-form .file-item-remove {
+    padding: 5px;
+    cursor: pointer;
+    display: none;
+}
+
+.tiny-transfer-form .file-item-download {
+    display: block;
+    font-size: 26px;
+    min-width: 36px;
+    min-height: 50px;
+}
+
+.tiny-transfer-form .downloads.disabled,
+.tiny-transfer-form .file-item-download.disabled {
+    cursor: default;
+    opacity: .5;
+    pointer-events: none;
+}
+
+.tiny-transfer-form .file-item-download i,
+.tiny-transfer-form .file-item-remove i {
+    color: #0073e5;
+}
+
+.tiny-transfer-form .file-item:hover .file-item-remove {
+    display: block;
+}
+
+.tiny-transfer-form .file-item-download.loading i {
+    display: none;
+    opacity: 1;
+}
+
+
+/* tiny-transfer-footer */
+
+.tiny-transfer-form .tiny-transfer-footer {
+    border-top: 1px solid #d4d7d9;
+    height: 4.5em;
+    padding: 0 1.25em;
+    position: relative;
+    z-index: 3;
+}
+
+.tiny-transfer-form .tiny-transfer-footer .footer-complete-container,
+.tiny-transfer-form .tiny-transfer-footer .footer-cancel-btn,
+.tiny-transfer-form .tiny-transfer-footer .footer-cancel-container {
+    display: none;
+    text-align: center;
+    width: 100%;
+}
+
+.tiny-transfer-form .tiny-transfer-footer .footer-cancel-btn button {
+    width: 50%;
+}
+
+.tiny-transfer-form .tiny-transfer-footer .footer-cancel-container button {
+    width: 35%;
+}
+
+.tiny-transfer-form .tiny-transfer-footer a {
+    cursor: pointer;
+}
+
+.tiny-transfer-form .tiny-transfer-footer i {
+    font-size: 24px;
+    color: #409fff;
+}
+
+.tiny-transfer-form .tiny-transfer-footer .active i {
+    color: #0073e5;
+}
+
+.tiny-transfer-form .tiny-transfer-footer .tiny-transfer-button {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tiny-transfer-form .tiny-transfer-footer .tiny-transfer-button button {
+    width: 150px;
+    border-radius: 30px;
+}
+
+
+/* files-add-event public */
+
+.tiny-transfer-form .files-add-event i {
+    font-size: 36px;
+    color: #409fff;
+}
+
+.tiny-transfer-form .files-add-event .add-files-label {
+    margin-left: 5px;
+}
+
+.tiny-transfer-form .files-add-event strong {
+    font-size: 18px;
+    color: #17181a;
+}
+
+.tiny-transfer-form .files-add-event p {
+    font-size: 14px;
+    color: #484a4d;
+}
+
+.tiny-transfer-form .files-add-event:hover i {
+    color: #0073e5;
+}
+
+
+/* files-empty */
+
+.tiny-transfer-form .files-empty .files-add-event {
+    cursor: pointer;
+    outline: 0;
+    width: 100%;
+}
+
+.tiny-transfer-form.type-email .files-empty .files-add-event {
+    padding: 72px 30px;
+}
+
+.tiny-transfer-form.type-link .files-empty .files-add-event {
+    padding: 100px 30px;
+}
+
+.tiny-transfer-form .fields {
+    min-height: 7.5em;
+    padding: 0 20px;
+}
+
+.tiny-transfer-form .fields .field-recipient-summary {
+    display: none;
+    padding: 13px 10px 14px 10px;
+    border-bottom: 1px solid #d4d7d9;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.tiny-transfer-form .fields .recipients {
+    margin: 0;
+    overflow: auto;
+    padding-top: 10px;
+}
+
+.tiny-transfer-form .fields .fields-recipient {
+    display: block;
+}
+
+.tiny-transfer-form .fields .fields-recipient p {
+    background: #e8ebed;
+    border: 0;
+    border-radius: .78571em;
+    clear: both;
+    color: #17181a;
+    cursor: default;
+    font-weight: 400;
+    display: inline-block;
+    font-size: .875em;
+    line-height: 1;
+    margin: 0 0 .28571em;
+    max-width: 100%;
+    outline: 0;
+    overflow: hidden;
+    padding: .28571em .57143em;
+    position: relative;
+    text-overflow: ellipsis;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.tiny-transfer-form .fields .fields-remove-recipient {
+    background: linear-gradient(90deg, rgba(232, 235, 237, 0), #e8ebed 50%, #e8ebed);
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+    height: 100%;
+    line-height: 1.6;
+    width: 2em;
+}
+
+.tiny-transfer-form .fields .fields-remove-recipient i {
+    font-size: 10px;
+    padding: 4px;
+}
+
+.tiny-transfer-form .fields .fields-recipient p:hover .fields-remove-recipient {
+    opacity: 1;
+}
+
+.tiny-transfer-form .fields .input {
+    border-bottom: 1px solid #d4d7d9;
+}
+
+.tiny-transfer-form.type-link .fields .field-recipient-container,
+.tiny-transfer-form.type-link .fields .input {
+    display: none;
+}
+
+.tiny-transfer-form.type-link .fields .field-recipient-summary {
+    display: none !important;
+}
+
+.tiny-transfer-form .message textarea,
+.tiny-transfer-form .fields textarea,
+.tiny-transfer-form .fields input {
+    display: block;
+    box-sizing: padding-box;
+    overflow: hidden;
+    padding: 10px;
+    font-size: 14px;
+    border: 0;
+    resize: none;
+    width: 100%;
+    user-select: text !important;
+}
+
+.tiny-transfer-form .options {
+    background: #f7f9fa;
+    border-top: 1px solid #d4d7d9;
+    padding: 0 10px;
+}
+
+.tiny-transfer-form .options .option-item {
+    border-bottom: 1px solid #d4d7d9;
+    padding: .625em;
+}
+
+.tiny-transfer-form .options .option-item input {
+    display: block;
+    box-sizing: padding-box;
+    overflow: hidden;
+    padding: 6px 4px;
+    font-size: 14px;
+    border: 0;
+    resize: none;
+    width: 100%;
+    user-select: text !important;
+    background-color: transparent;
+}
+
+.tiny-transfer-form .options .option-item input:focus {
+    background-color: #fff;
+}
+
+.tiny-transfer-form .options .option-item:last-of-type {
+    border-bottom: 0;
+}
+
+.tiny-transfer-form .options .options-type {
+    font-size: 16px;
+}
+
+.tiny-transfer-form .options .options-features {
+    font-size: 14px;
+}
+
+.tiny-transfer-form .options .options-features label {
+    font-size: 13px;
+}
+
+
+/* tiny-transfer-progress */
+
+.tiny-transfer-form .tiny-transfer-complete,
+.tiny-transfer-form .tiny-transfer-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #fff;
+    display: none;
+}
+
+.tiny-transfer-form .tiny-transfer-progress .progress-svg {
+    display: block;
+    position: relative;
+    margin: 1.875em auto .75em;
+    width: 180px;
+}
+
+.tiny-transfer-form .tiny-transfer-progress svg {
+    height: 180px;
+    width: 180px;
+    transform-origin: 50% 50%;
+    animation: circle-rotate 2s linear infinite;
+    -webkit-animation: circle-rotate 2s linear infinite;
+}
+
+@-webkit-keyframes circle-rotate {
+    0% {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+@keyframes circle-rotate {
+    0% {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+.tiny-transfer-form .tiny-transfer-progress .circle {
+    fill: none;
+    pointer-events: none;
+    stroke-width: 1.2;
+    stroke: rgb(232, 235, 237);
+}
+
+.tiny-transfer-form .tiny-transfer-progress .progress {
+    border-radius: 10px;
+    fill: none;
+    stroke: rgb(64, 159, 255);
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: 100;
+    stroke-linecap: round;
+    stroke-width: 1.2;
+    transition: stroke-dashoffset 0.3s ease-in-out;
+    -webkit-transition: stroke-dashoffset 0.3s ease-in-out;
+    -moz-transition: stroke-dashoffset 0.3s ease-in-out;
+    -ms-transition: stroke-dashoffset 0.3s ease-in-out;
+    -o-transition: stroke-dashoffset 0.3s ease-in-out;
+}
+
+.tiny-transfer-form .tiny-transfer-progress .progress-label {
+    color: #17181a;
+    font-size: 3.875em;
+    font-weight: 400;
+    left: 50%;
+    line-height: 1;
+    margin: -2px 0 0 2px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap
+}
+
+.tiny-transfer-form .tiny-transfer-progress .progress-label strong {
+    font-weight: 400;
+}
+
+.tiny-transfer-form .tiny-transfer-progress .progress-label span {
+    color: #babcbf;
+    display: inline-block;
+    font-size: .35484em;
+    font-weight: 400;
+    line-height: 1;
+    position: relative;
+    top: .27273em;
+    vertical-align: top
+}
+
+.tiny-transfer-form .cancel-warp {
+    display: none;
+}
+
+.tiny-transfer-form .transferring-warp h2,
+.tiny-transfer-form .cancel-warp h2 {
+    color: #17181a;
+    font-size: 1.375em;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0 0 .36364em;
+    padding: 0 .90909em;
+    text-align: center
+}
+
+.tiny-transfer-form .transferring-warp p {
+    color: #484a4d;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.61538em;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tiny-transfer-form .transferring-warp a {
+    color: #409fff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.tiny-transfer-form .complete-link,
+.tiny-transfer-form .complete-email {
+    display: none;
+}
+
+.type-link .complete-link,
+.type-email .complete-email {
+    display: block;
+}
+
+
+/* tiny-transfer-complete */
+
+.tiny-transfer-form .tiny-transfer-complete .complete-icon {
+    display: block;
+    height: 10.625rem;
+    width: 10.625rem;
+    margin: 0 auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding: 20px;
+}
+
+.tiny-transfer-form .tiny-transfer-complete .complete-icon .text {
+    text-align: center;
+    color: #5C5F6F;
+    font-family: 'Handlee', cursive;
+    font-size: 3rem;
+}
+
+.tiny-transfer-form .tiny-transfer-complete .complete-icon .star {
+    -webkit-animation: star 3s ease infinite;
+    animation: star 3s ease infinite;
+}
+
+.tiny-transfer-form .tiny-transfer-complete .complete-icon .fack-star {
+    -webkit-animation: star 2s ease infinite;
+    animation: star 2s ease infinite;
+}
+
+.tiny-transfer-form .tiny-transfer-complete .complete-icon .fire {
+    position: relative;
+    -webkit-animation: fireworks 3s linear infinite;
+    animation: fireworks 3s linear infinite;
+}
+
+@-webkit-keyframes fireworks {
+    0% {
+        -webkit-transform: translate(-5rem, 4rem);
+        transform: translate(-5rem, 4rem);
+    }
+    50% {
+        -webkit-transform: scale(2) translate(5rem, -20rem);
+        transform: scale(2) translate(5rem, -20rem);
+    }
+    100% {
+        -webkit-transform: scale(2.5) translate(20rem, -20rem);
+        transform: scale(2.5) translate(20rem, -20rem);
+    }
+}
+
+@keyframes fireworks {
+    0% {
+        -webkit-transform: translate(-5rem, 4rem);
+        transform: translate(-5rem, 4rem);
+    }
+    50% {
+        -webkit-transform: scale(2) translate(5rem, -20rem);
+        transform: scale(2) translate(5rem, -20rem);
+    }
+    100% {
+        -webkit-transform: scale(2.5) translate(20rem, -20rem);
+        transform: scale(2.5) translate(20rem, -20rem);
+    }
+}
+
+@-webkit-keyframes star {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes star {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.tiny-transfer-form .tiny-transfer-complete .transferring-warp {
+    padding: 0 20px;
+}
+
+
+/* tiny-transfer-details */
+
+.tiny-transfer-details {
+    position: absolute;
+    left: 0;
+    top: 1em;
+    width: 300px;
+    height: 26em;
+    background-color: #fff;
+    z-index: 1;
+    padding: 14px;
+    border-radius: 0 10px 10px 0;
+    -webkit-border-radius: 0 10px 10px 0;
+    -moz-border-radius: 0 10px 10px 0;
+    -ms-border-radius: 0 10px 10px 0;
+    -o-border-radius: 0 10px 10px 0;
+    transition: all .8s cubic-bezier(.77, 0, .175, 1);
+    -webkit-transition: all .8s cubic-bezier(.77, 0, .175, 1);
+    -moz-transition: all .8s cubic-bezier(.77, 0, .175, 1);
+    -ms-transition: all .8s cubic-bezier(.77, 0, .175, 1);
+    -o-transition: all .8s cubic-bezier(.77, 0, .175, 1);
+    transform: translate3d(0, 0, 0);
+    opacity: .3;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.tiny-transfer-details.show {
+    transform: translate3d(320px, 0, 0);
+    -webkit-transform: translate3d(320px, 0, 0);
+    -moz-transform: translate3d(320px, 0, 0);
+    -ms-transform: translate3d(320px, 0, 0);
+    -o-transform: translate3d(320px, 0, 0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.tiny-transfer-details .details-close {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: #000;
+    padding: 8px;
+    display: block;
+    line-height: 1.2;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.tiny-transfer-details h4 {
+    font-weight: 400;
+    color: #000;
+}
+
+.tiny-transfer-details .details-subtitle {
+    border-bottom: 1px solid #e8ebed;
+    font-size: .875em;
+    padding-bottom: 0.5625rem;
+    margin-bottom: 0.5625rem;
+}
+
+.tiny-transfer-details .details-filelist ul span:not(:last-child):after,
+.tiny-transfer-details .details-subtitle span:not(:last-child):after {
+    display: inline-block;
+    padding: 0 .375em;
+    content: "·";
+}
+
+.tiny-transfer-details .details-message {
+    margin-bottom: 0.5625rem;
+}
+
+.tiny-transfer-details .details-message p {
+    font-weight: 400;
+    color: #484a4d;
+    font-size: .875em;
+    line-height: 1.4;
+    margin-top: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.tiny-transfer-details .details-filelist ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tiny-transfer-details .details-filelist li {
+    border-bottom: 1px solid #e8ebed;
+    padding-bottom: 10px;
+}
+
+.tiny-transfer-details .details-filelist ul h6 {
+    color: #17181a;
+    font-size: .875em;
+    margin: 0;
+}
+
+.tiny-transfer-details .details-filelist ul p {
+    color: #6a6d70;
+    display: block;
+    font-size: .75em;
+    line-height: 1.16667em;
+    margin: 0
+}
+
+
+/* tiny-transfer-download */
+
+.tiny-transfer-download .tiny-transfer-password {
+    padding: 50px 0 0 0;
+}
+
+.tiny-transfer-download .tiny-transfer-password .password-icon {
+    font-size: 4.5rem;
+}
+
+.tiny-transfer-download .tiny-transfer-password .transferring-warp {
+    margin-bottom: 76px;
+    padding: 0 20px;
+}
+
+.tiny-transfer-download .password-panel-loading {
+    min-height: 448px;
+}
+
+.tiny-transfer-download .download-file-list p {
+    font-weight: 400;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.tiny-transfer-download .file-item-download i:before {
+    content: "\e602";
+}
+
+.tiny-transfer-download .download-success i:before {
+    content: "\e667";
+}
+
+.tiny-transfer-download .download-success:hover i:before {
+    content: "\e602";
+}
+
+.tiny-transfer-download .download-scrollbar .transferring-warp {
+    padding: 20px 0;
+    min-height: 376px;
+}
+
+#svgC {
+    padding: 20px;
+    margin: 0 auto;
+    width: 80%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+
+/* ui-uploader-dropping */
+
+.ui-uploader-dropping .tiny-transfer-footer,
+.ui-uploader-dropping .form-scrollbar {
+    filter: blur(3px);
+}
+
+@media (max-width: 600px) {
+    .tiny-transfer {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        height: 100%;
+    }
+    .tiny-transfer-form {
+        box-shadow: none;
+    }
+    .tiny-transfer-form .file-item-download,
+    .tiny-transfer-form .file-item-remove {
+        display: block;
+        padding: 5px 10px;
+    }
+    .tiny-transfer-form.type-email .files-empty .files-add-event {
+        padding: 170px 30px;
+        background-color: rgba(0, 0, 0, .025);
+    }
+    .tiny-transfer-details {
+        width: 100%;
+        height: 100%;
+        top: -100%;
+    }
+    .tiny-transfer-details.show {
+        transform: translate3d(0, 100%, 0);
+        -webkit-transform: translate3d(0, 100%, 0);
+        -moz-transform: translate3d(0, 100%, 0);
+        -ms-transform: translate3d(0, 100%, 0);
+        -o-transform: translate3d(0, 100%, 0);
+        z-index: 2;
+    }
+    .details-centont {
+        padding: 20px;
+    }
+    .scrollbar,
+    .ui-scrollbar>.ui-scrollbar-content {
+        width: 100%;
+    }
+    .tiny-transfer-form.type-email .files-list {
+        min-height: 534px;
+    }
+}

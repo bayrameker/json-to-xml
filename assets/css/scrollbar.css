@@ -1,0 +1,101 @@
+.ui-scrollbar {
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative
+}
+
+.ui-scrollbar,
+.ui-scrollbar-bar,
+.ui-scrollbar-content,
+.ui-scrollbar-handle,
+.ui-scrollbar-track {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.scrollbar,
+.ui-scrollbar>.ui-scrollbar-content {
+    width: calc(100% + 18px);
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    border: none;
+    outline: none;
+}
+
+.ui-scrollbar>.ui-scrollbar-content::-webkit-resizer,
+.ui-scrollbar>.ui-scrollbar-content::-webkit-scrollbar,
+.ui-scrollbar>.ui-scrollbar-content::-webkit-scrollbar-button,
+.ui-scrollbar>.ui-scrollbar-content::-webkit-scrollbar-corner,
+.ui-scrollbar>.ui-scrollbar-content::-webkit-scrollbar-thumb,
+.ui-scrollbar>.ui-scrollbar-content::-webkit-scrollbar-track,
+.ui-scrollbar>.ui-scrollbar-content::-webkit-scrollbar-track-piece {
+    background: 0 0;
+    opacity: 0
+}
+
+.ui-scrollbar>.ui-scrollbar-bar {
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    right: 2px;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: 10px 0;
+    display: none
+}
+
+.ui-scrollbar>.ui-scrollbar-bar .ui-scrollbar-track {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden
+}
+
+.ui-scrollbar>.ui-scrollbar-bar .ui-scrollbar-handle {
+    width: 4px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    background: rgba(0, 0, 0, .25);
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border-radius: 20px;
+}
+
+.ui-scrollbar-horizontal>.ui-scrollbar-content {
+    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 0 20px 0
+}
+
+.ui-scrollbar-horizontal>.ui-scrollbar-bar {
+    width: 100%;
+    height: 20px;
+    top: auto;
+    bottom: 0;
+}
+
+.ui-scrollbar-horizontal>.ui-scrollbar-bar .ui-scrollbar-handle {
+    width: 40px;
+    height: 20px;
+    top: auto;
+    right: auto;
+    bottom: 0
+}
+
+.ui-scrollbar-active>.ui-scrollbar-bar,
+.ui-scrollbar-setup>.ui-scrollbar-bar {
+    display: block
+}
